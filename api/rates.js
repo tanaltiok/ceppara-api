@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   try {
     const [goldRes, fxRes] = await Promise.all([
-      fetch('https://api.binance.com/api/v3/ticker/price?symbol=XAUUSDT'),
+      fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT'),
       fetch('https://open.er-api.com/v6/latest/USD')
     ]);
 
