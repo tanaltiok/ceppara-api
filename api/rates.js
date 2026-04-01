@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   try {
     const [goldRes, fxRes] = await Promise.all([
-      fetch('https://www.doviz.com/api/v1/currencies/gram-altin/latest'),
+      fetch('https://api.binance.com/api/v3/ticker/price?symbol=XAUUSDT'),
       fetch('https://open.er-api.com/v6/latest/USD')
     ]);
 
@@ -13,9 +13,10 @@ export default async function handler(req, res) {
     const eurTry = usdTry / fxData.rates.EUR;
     const gbpTry = usdTry / fxData.rates.GBP;
     const cadTry = usdTry / fxData.rates.CAD;
+    const gramGold = (parseFloat(goldData.price) / 31.1035) * usdTry;
 
     res.json({
-      gramGold: goldData?.selling,
+      gramGold,
       usdTry,
       eurTry,
       gbpTry,
